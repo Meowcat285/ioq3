@@ -96,4 +96,8 @@ include(basegame)
 include(missionpack)
 
 include(post_configure)
+
+enable_testing()
+add_subdirectory(tests)
+
 include(installer)
