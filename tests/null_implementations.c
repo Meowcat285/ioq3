@@ -2,6 +2,7 @@
 // but are not needed for the tests to run.
 
 #include <stdarg.h>
+#include <stdio.h>
 
 // Dummy variables
 int c_pointcontents;
