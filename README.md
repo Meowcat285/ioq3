@@ -1,5 +1,8 @@
 ![Build](https://github.com/ioquake/ioq3/workflows/Build/badge.svg)
 
+# Meowcat's weird AI modfied version of ioquake3
+## I'm testing to see how capable AI is for modifying codebases
+
                    ,---------------------------------------.
                    |   _                     _       ____  |
                    |  (_)___  __ _ _  _ __ _| |_____|__ /  |
