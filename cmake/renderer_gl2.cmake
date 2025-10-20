@@ -4,6 +4,8 @@ endif()
 
 include(utils/set_output_dirs)
 include(renderer_common)
+include(rhi)
+include(rhi_gl)
 
 set(RENDERER_GL2_SOURCES
     ${SOURCE_DIR}/renderergl2/tr_animation.c
@@ -67,6 +69,8 @@ set(RENDERER_GL2_BINARY ${RENDERER_GL2_BASENAME})
 
 list(APPEND RENDERER_GL2_BINARY_SOURCES
     ${RENDERER_COMMON_SOURCES}
+    ${RHI_SOURCES}
+    ${RHI_GL_SOURCES}
     ${RENDERER_GL2_SOURCES}
     ${RENDERER_GL2_SHADER_C_SOURCES}
     ${SDL_RENDERER_SOURCES}

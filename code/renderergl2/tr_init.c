@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // tr_init.c -- functions that are not called every frame
 
 #include "tr_local.h"
+#include "../rhi/rhi.h"
 
 #include "tr_dsa.h"
 
@@ -33,6 +34,8 @@ float       displayAspect = 0.0f;
 qboolean    haveClampToEdge = qfalse;
 
 glstate_t	glState;
+
+RHI_Device *rhi_device;
 
 static void GfxInfo_f( void );
 static void GfxMemInfo_f( void );
@@ -1488,6 +1491,11 @@ void R_Init( void ) {
 
 	ri.Printf( PRINT_ALL, "----- R_Init -----\n" );
 
+	rhi_device = RHI_Init("opengl", (void*)&ri);
+	if (!rhi_device) {
+		ri.Error(ERR_FATAL, "RHI_Init failed");
+	}
+
 	// clear all our internal state
 	Com_Memset( &tr, 0, sizeof( tr ) );
 	Com_Memset( &backEnd, 0, sizeof( backEnd ) );
@@ -1589,6 +1597,8 @@ RE_Shutdown
 void RE_Shutdown( qboolean destroyWindow ) {	
 
 	ri.Printf( PRINT_ALL, "RE_Shutdown( %i )\n", destroyWindow );
+
+	RHI_Shutdown(rhi_device);
 
 	ri.Cmd_RemoveCommand( "imagelist" );
 	ri.Cmd_RemoveCommand( "shaderlist" );
