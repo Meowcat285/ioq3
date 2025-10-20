@@ -75,6 +75,25 @@ function(finish_macos_app)
             add_dependencies(${CLIENT_BINARY} ${RENDERER_GL2_BINARY})
         endif()
     endif()
+
+    finish_macos_app_bundle()
+endfunction()
+
+function(finish_macos_app_bundle)
+    set(MACOS_BUNDLE_LIBRARIES "")
+    list(APPEND MACOS_BUNDLE_LIBRARIES ${CLIENT_DEPLOY_LIBRARIES})
+
+    if(USE_RENDERER_DLOPEN)
+        if(BUILD_RENDERER_GL1)
+            list(APPEND MACOS_BUNDLE_LIBRARIES $<TARGET_FILE:${RENDERER_GL1_BINARY}>)
+        endif()
+        if(BUILD_RENDERER_GL2)
+            list(APPEND MACOS_BUNDLE_LIBRARIES $<TARGET_FILE:${RENDERER_GL2_BINARY}>)
+        endif()
+    endif()
+
+    install(FILES ${MACOS_BUNDLE_LIBRARIES}
+        DESTINATION ${MACOS_APP_BUNDLE_NAME}.app/Contents/MacOS)
 endfunction()
 
 if(NOT "$ENV{APPLE_CERTIFICATE_ID}" STREQUAL "")
